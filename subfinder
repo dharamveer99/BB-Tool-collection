@@ -1,0 +1,9 @@
+Install
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+To run the tool on a target, just use the following command.
+subfinder -d hackerone.com
+
+The subdomains discovered can be piped to other tools too. For example, you can pipe the discovered subdomains to httpx which will then find running HTTP servers on the host.
+echo hackerone.com | subfinder -silent | httpx -silent
+
