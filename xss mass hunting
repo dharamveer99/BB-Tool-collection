@@ -1,0 +1,32 @@
+1. Find as many subdomains as possible
+2. cat all_subs.txt | dnsx | tee -a resolved_ones.txt
+3. cat resolved_ones.txt | httpx | tee -a alive_ones.txt
+4. ffuf -w /root/wordlist/api/swagger_xss.txt:FUZZ -w alive_ones.txt:URL -u URLFUZZ -mc 200 -o ffuf-result.txt
+5. cat ffuf-result.txt | jq -r .results[].url | tee -a feed_me_to_httpx.txt
+6. cat feed_me_to_httpx.txt | httpx -silent -title | tee -a title.txt
+7. cat title.txt | grep "Swagger UI"
+
+First Step
+Find as many subdomains as possible you can get help from Chaos.
+
+Second Step
+Now it’s time to resolve subdomains. If you get false positive, use ShuffleDNS with -d and -l options.
+
+Third Step
+After resolving them, we need to find alive subdomains. You can add
+User-Agent, Time Delay and etc
+
+Fourth Step
+Now we are ready to fuzz for Swagger UI endpoints.
+
+ffuf -w /root/wordlist/api/swagger_xss.txt:FUZZ -w alive_ones.txt:URL -u URLFUZZ -mc 200 -o ffuf-result.txt
+Fifth Step
+Extracting found URLs from ffuf result.
+
+cat ffuf-result.txt | jq -r .results[].url | tee -a feed_me_to_httpx.txt
+Sixth Step
+Now, we use httpx with -title to get the title of fuzzed and possible endpoints for Swagger UI.
+
+cat feed_me_to_httpx.txt | httpx -silent -title | tee -a title.txt
+Seventh Step
+cat title.txt | grep "Swagger UI"
