@@ -1,0 +1,4 @@
+git clone https://github.com/ViktorMares/ultimate_discovery.git
+sudo apt-get install dirsearch
+dirsearch -u https://example.com --exclude-status=404 -w ~/ultimate-discovery.txt
+
